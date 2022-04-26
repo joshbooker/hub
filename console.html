@@ -24,7 +24,7 @@
   </head>
 
   <body>
-
+    <input id="did_linkedDomain" />
     <button id="generate_did">Generate Test DID</button>
     <form id="generate_jws_form">
       <input id="jws_payload" />
@@ -49,6 +49,7 @@
     <script>
 
       async function generateDID(){
+        let serviceEndPoint = did_linkedDomain.value || '';
         let authnKeys = await ION.generateKeyPair();
         return new ION.DID({
           content: {
@@ -64,7 +65,7 @@
               {
                 id: 'domain-1',
                 type: 'LinkedDomains',
-                serviceEndpoint: 'https://foo.example.com'
+                serviceEndpoint: serviceEndPoint
               }
             ]
           }
@@ -121,7 +122,7 @@
       submit_explorer.addEventListener('click', async () => {
         let payload = did_payload.value || '';
         submit_explorer.textContent = "submitting request... look at console to see progress and result"
-        const response = await ION.resolve(payload);
+        const response = await ION.resolve(payload,{nodeEndpoint:'https://beta.discover.did.microsoft.com/1.0/identifiers/'});
         console.log(response);
       })
     </script>
