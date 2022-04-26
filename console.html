@@ -31,7 +31,8 @@
       <button id="generate_jws">Generate JWS</button>
     </form>
     <button id="submit_pow">Test submit DID</button>
-
+    <input id="did_payload" />
+    <button id="submit_explorer">Test Explore DID</button>
     <h3>JWS</h3>
     <pre id="print_jws"></pre>
 
@@ -44,7 +45,7 @@
     <h3>Create DID Request Object</h3>
     <pre id="print_request"></pre>
 
-    <script src="../dist/ion.js"></script>
+    <script src="ion.js"></script>
     <script>
 
       async function generateDID(){
@@ -115,6 +116,13 @@
       submit_pow.addEventListener('click', async () => {
         submit_pow.textContent = "submitting request... look at console to see progress and result"
         await new ION.AnchorRequest(request).submit();
+      })
+      
+      submit_explorer.addEventListener('click', async () => {
+        let payload = did_payload.value || '';
+        submit_explorer.textContent = "submitting request... look at console to see progress and result"
+        const response = await ION.resolve(payload);
+        console.log(response);
       })
     </script>
   </body>
