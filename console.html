@@ -27,14 +27,20 @@
     <H1>ION Tools Console Testing Page</H1>
     <H4>Example did:ion:EiALaq_U-7EHDiAB3wyzqGINaM6bX4WHHRZ2DpKSWClTHg</H4>
     <input id="did_linkedDomain" />
-    <button id="generate_did">Generate Test DID</button>
+    <button id="generate_did">Generate Test DID</button></br>
+
     <form id="generate_jws_form">
       <input id="jws_payload" />
       <button id="generate_jws">Generate JWS</button>
     </form>
-    <button id="submit_pow">Test submit DID</button>
+    <button id="submit_pow">Test submit DID</button></br>
+
     <input id="did_payload" />
-    <button id="submit_explorer">Test Explore DID</button>
+    <button id="submit_explorer">Test ION Explorer</button>
+    <button id="submit_resolver">Test ION Resolver</button>
+    <button id="submit_unisolver">Test Universal Resolver</button></br>
+
+ 
     <h3>JWS</h3>
     <pre id="print_jws"></pre>
 
@@ -118,18 +124,24 @@
         console.log(jws, jwsDetached);
         print_jws.textContent = jws;
       })
-
       submit_pow.addEventListener('click', async () => {
         submit_pow.textContent = "submitting request... look at console to see progress and result"
         await new ION.AnchorRequest(request).submit();
       })
-      
       submit_explorer.addEventListener('click', async () => {
+        submit_explorer.textContent = "launching"
+        window.open('https://identity.foundation/ion/explorer/?did=' + did_payload.value, '_blank');
+      })
+      submit_resolver.addEventListener('click', async () => {
         let payload = did_payload.value || '';
-        submit_explorer.textContent = "submitting request... look at console to see progress and result"
+        submit_resolver.textContent = "submitting request... look at console to see progress and result"
         const response = await ION.resolve(payload,{nodeEndpoint:'https://beta.discover.did.microsoft.com/1.0/identifiers/'});
         console.log(response);
         print_DIDdoc.textContent = JSON.pretty(response);
+      })
+      submit_unisolver.addEventListener('click', async () => {
+        submit_unisolver.textContent = "launching"
+        window.open('https://dev.uniresolver.io/#' + did_payload.value, '_blank');
       })
     </script>
   </body>
