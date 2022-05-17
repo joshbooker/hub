@@ -26,15 +26,18 @@
   <body>
     <H1>ION Tools Console Testing Page</H1>
     <H4>Example did:ion:EiALaq_U-7EHDiAB3wyzqGINaM6bX4WHHRZ2DpKSWClTHg</H4>
+    <label for="did_linkedDomain">Linked Domain:</label>
     <input id="did_linkedDomain" />
-    <button id="generate_did">Generate Test DID</button></br>
+    <button id="generate_did">Generate Test DID</button>
 
     <form id="generate_jws_form">
+      <label for="jws_payload">JWS Payload:</label>
       <input id="jws_payload" />
       <button id="generate_jws">Generate JWS</button>
     </form>
     <button id="submit_pow">Test submit DID</button></br>
-
+    
+    <label for="did_payload">DID Payload:</label>
     <input id="did_payload" />
     <button id="submit_explorer">Test ION Explorer</button>
     <button id="submit_resolver">Test ION Resolver</button>
