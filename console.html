@@ -24,6 +24,8 @@
   </head>
 
   <body>
+    <H1>ION Tools Console Testing Page</H1>
+    <H4>Example did:ion:EiALaq_U-7EHDiAB3wyzqGINaM6bX4WHHRZ2DpKSWClTHg</H4>
     <input id="did_linkedDomain" />
     <button id="generate_did">Generate Test DID</button>
     <form id="generate_jws_form">
@@ -44,6 +46,9 @@
 
     <h3>Create DID Request Object</h3>
     <pre id="print_request"></pre>
+
+    <h3>Resolved DID Doc</h3>
+    <pre id="print_DIDdoc"></pre>
 
     <script src="ion.js"></script>
     <script>
@@ -124,6 +129,7 @@
         submit_explorer.textContent = "submitting request... look at console to see progress and result"
         const response = await ION.resolve(payload,{nodeEndpoint:'https://beta.discover.did.microsoft.com/1.0/identifiers/'});
         console.log(response);
+        print_DIDdoc.textContent = JSON.pretty(response);
       })
     </script>
   </body>
